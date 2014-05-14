@@ -22,6 +22,8 @@
 		06B67555192377180092A85B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B67534192377180092A85B /* UIKit.framework */; };
 		06B6755D192377180092A85B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06B6755B192377180092A85B /* InfoPlist.strings */; };
 		06B6755F192377180092A85B /* KeychainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B6755E192377180092A85B /* KeychainTests.m */; };
+		06B6756A192377370092A85B /* GM_Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B67569192377370092A85B /* GM_Keychain.m */; };
+		06B6756C192377800092A85B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B6756B192377800092A85B /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,9 @@
 		06B6755A192377180092A85B /* KeychainTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KeychainTests-Info.plist"; sourceTree = "<group>"; };
 		06B6755C192377180092A85B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06B6755E192377180092A85B /* KeychainTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeychainTests.m; sourceTree = "<group>"; };
+		06B67568192377370092A85B /* GM_Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GM_Keychain.h; sourceTree = "<group>"; };
+		06B67569192377370092A85B /* GM_Keychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GM_Keychain.m; sourceTree = "<group>"; };
+		06B6756B192377800092A85B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06B6756C192377800092A85B /* Security.framework in Frameworks */,
 				06B67533192377180092A85B /* CoreGraphics.framework in Frameworks */,
 				06B67535192377180092A85B /* UIKit.framework in Frameworks */,
 				06B67531192377180092A85B /* Foundation.framework in Frameworks */,
@@ -103,6 +109,7 @@
 		06B6752F192377180092A85B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06B6756B192377800092A85B /* Security.framework */,
 				06B67530192377180092A85B /* Foundation.framework */,
 				06B67532192377180092A85B /* CoreGraphics.framework */,
 				06B67534192377180092A85B /* UIKit.framework */,
@@ -120,6 +127,8 @@
 				06B67545192377180092A85B /* Main_iPad.storyboard */,
 				06B67548192377180092A85B /* ViewController.h */,
 				06B67549192377180092A85B /* ViewController.m */,
+				06B67568192377370092A85B /* GM_Keychain.h */,
+				06B67569192377370092A85B /* GM_Keychain.m */,
 				06B6754B192377180092A85B /* Images.xcassets */,
 				06B67537192377180092A85B /* Supporting Files */,
 			);
@@ -256,6 +265,7 @@
 				06B6754A192377180092A85B /* ViewController.m in Sources */,
 				06B67541192377180092A85B /* AppDelegate.m in Sources */,
 				06B6753D192377180092A85B /* main.m in Sources */,
+				06B6756A192377370092A85B /* GM_Keychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,10 +400,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Zajarias-Fainsod (5HG93V87X9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keychain/Keychain-Prefix.pch";
 				INFOPLIST_FILE = "Keychain/Keychain-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D808D351-D344-4012-B9E0-DF90B4CCDFA3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -403,10 +416,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Zajarias-Fainsod (5HG93V87X9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Zajarias-Fainsod (5HG93V87X9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Keychain/Keychain-Prefix.pch";
 				INFOPLIST_FILE = "Keychain/Keychain-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D808D351-D344-4012-B9E0-DF90B4CCDFA3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

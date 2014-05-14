@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GM_Keychain.h"
 
 @interface ViewController ()
 
@@ -17,7 +18,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    NSLog(@"1 ");
+    
+    NSData *passwordData = [GM_Keychain searchKeychainCopyMatching:@"kUDID"];
+    if (passwordData != nil)
+    {
+        NSString *UDID = [[NSString alloc] initWithData:passwordData encoding:NSUTF8StringEncoding];
+        NSLog(@"UDID = %@", UDID);
+    }
+    else
+    {
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        NSLog(@"Save UDID = %@", uuid);
+        
+        BOOL saved = [GM_Keychain createKeychainValue:uuid forIdentifier:@"kUDID"];
+        
+        if (saved)
+        {
+            NSLog(@"No error while saving");
+        }
+        else
+        {
+            NSLog(@"Error while saving");
+        }
+    }
+    NSLog(@"2 ");
 }
 
 - (void)didReceiveMemoryWarning
