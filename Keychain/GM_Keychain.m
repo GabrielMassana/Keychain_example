@@ -11,7 +11,7 @@
 
 //Unique string used to identify the keychain item:
 static const NSString *serviceName          = @"com.company.something.unique.Keychain";
-static const NSString *accountAttributeKey  = @"kAccountAttributeKey";
+//static const NSString *accountAttributeKey  = @"kAccountAttributeKey";
 
 @implementation GM_Keychain
 
@@ -28,10 +28,10 @@ static const NSString *accountAttributeKey  = @"kAccountAttributeKey";
     [searchDictionary setObject:encodedIdentifier forKey:(__bridge id)kSecAttrGeneric];
     
     
-    NSData *encodedAccountAttributeKey = [accountAttributeKey dataUsingEncoding:NSUTF8StringEncoding];
+    //NSData *encodedAccountAttributeKey = [identifier dataUsingEncoding:NSUTF8StringEncoding];
     
     //kSecAttrAccount and kSecAttrService should be set to something unique for this keychain
-    [searchDictionary setObject:encodedAccountAttributeKey forKey:(__bridge id)kSecAttrAccount];
+    [searchDictionary setObject:encodedIdentifier forKey:(__bridge id)kSecAttrAccount];
     [searchDictionary setObject:serviceName forKey:(__bridge id)kSecAttrService];
     
     return searchDictionary;
@@ -75,6 +75,8 @@ static const NSString *accountAttributeKey  = @"kAccountAttributeKey";
     [dictionary setObject:passwordData forKey:(__bridge id)kSecValueData];
     
     OSStatus status = SecItemAdd((__bridge CFDictionaryRef)dictionary, NULL);
+    
+    NSLog(@"status = %d", (int)status);
     
     if (status == errSecSuccess) {
         return YES;
