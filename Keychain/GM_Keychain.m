@@ -15,7 +15,6 @@ static const NSString *serviceName          = @"com.company.something.unique.Key
 
 @implementation GM_Keychain
 
-
 + (NSMutableDictionary *)newSearchDictionary:(NSString *)identifier
 {
     NSMutableDictionary *searchDictionary = [[NSMutableDictionary alloc] init];
@@ -43,7 +42,7 @@ static const NSString *serviceName          = @"com.company.something.unique.Key
  *
  *
  */
-+ (NSData *)searchKeychainCopyMatching:(NSString *)identifier
++ (NSData *)stringInDataForKey:(NSString *)identifier
 {
     
     NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
@@ -67,7 +66,7 @@ static const NSString *serviceName          = @"com.company.something.unique.Key
  * Add new item (password) to the Keychain with identifier
  *
  */
-+ (BOOL)createKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier
++ (BOOL)setString:(NSString *)password forKey:(NSString *)identifier
 {
     NSMutableDictionary *dictionary = [self newSearchDictionary:identifier];
     
@@ -89,22 +88,27 @@ static const NSString *serviceName          = @"com.company.something.unique.Key
  *
  *
  */
-+ (BOOL)updateKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier
++ (BOOL)updateString:(NSString *)password forKey:(NSString *)identifier
 {
     
-    NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
-    NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
-    NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-    [updateDictionary setObject:passwordData forKey:(__bridge id)kSecValueData];
+//    NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
+//    NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
+//    NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+//    [updateDictionary setObject:passwordData forKey:(__bridge id)kSecValueData];
+//    
+//    OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)searchDictionary,
+//                                    (__bridge CFDictionaryRef)updateDictionary);
+//    
+//    
+//    if (status == errSecSuccess) {
+//        return YES;
+//    }
+//    return NO;
     
-    OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)searchDictionary,
-                                    (__bridge CFDictionaryRef)updateDictionary);
     
     
-    if (status == errSecSuccess) {
-        return YES;
-    }
-    return NO;
+    [self.class deleteStringWithKey:identifier];
+    return [self.class setString:password forKey:identifier];
 }
 
 /**
@@ -112,8 +116,8 @@ static const NSString *serviceName          = @"com.company.something.unique.Key
  * Delete item that match a search query with identifier
  *
  */
-+ (void)deleteKeychainValue:(NSString *)identifier {
-    
++ (void)deleteStringWithKey:(NSString *)identifier
+{
     NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
     SecItemDelete((__bridge CFDictionaryRef)searchDictionary);
 }

@@ -11,15 +11,15 @@
 @interface GM_Keychain : NSObject
 
 //Search in Keychain by identifier
-+ (NSData *)searchKeychainCopyMatching:(NSString *)identifier;
++ (NSData *)stringInDataForKey:(NSString *)identifier;
 
 //Add new item (password) to the Keychain with identifier
-+ (BOOL)createKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier;
++ (BOOL)setString:(NSString *)password forKey:(NSString *)identifier;
 
 //Modify an item (password) in Keychain with identifier
-+ (BOOL)updateKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier;
++ (BOOL)updateString:(NSString *)password forKey:(NSString *)identifier;
 
 //Delete item that match a search query with identifier
-+ (void)deleteKeychainValue:(NSString *)identifier ;
++ (void)deleteStringWithKey:(NSString *)identifier;
 
 @end

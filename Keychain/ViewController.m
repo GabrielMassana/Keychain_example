@@ -21,7 +21,7 @@
 
     NSLog(@"1 ");
     
-    NSData *passwordData = [GM_Keychain searchKeychainCopyMatching:@"kUDID"];
+    NSData *passwordData = [GM_Keychain stringInDataForKey:@"kUDID"];
     if (passwordData != nil)
     {
         NSString *UDID = [[NSString alloc] initWithData:passwordData encoding:NSUTF8StringEncoding];
@@ -32,7 +32,7 @@
         NSString *uuid = [[NSUUID UUID] UUIDString];
         NSLog(@"Save UDID = %@", uuid);
         
-        BOOL saved = [GM_Keychain createKeychainValue:uuid forIdentifier:@"kUDID"];
+        BOOL saved = [GM_Keychain setString:uuid forKey:@"kUDID"];
         
         if (saved)
         {
